@@ -1,0 +1,21 @@
+rules:
+  - id: cwe-89-sql-injection
+    message: "CWE-89: SQL Injection vulnerability. Do not use string formatting to build SQL queries."
+    languages: [go]
+    severity: ERROR
+    pattern: fmt.Sprintf("SELECT id, name, role FROM users WHERE username = '%s'", ...)
+
+  - id: cwe-798-hardcoded-secret
+    message: "CWE-798: Hardcoded Secret. Never store credentials or keys in source code."
+    languages: [go]
+    severity: ERROR
+    pattern: const hardcodedJWTSecret = ...
+
+  - id: cwe-insecure-jwt-validation
+    message: "Insecure JWT Validation: Missing explicit algorithm allowlist."
+    languages: [go]
+    severity: ERROR
+    pattern: |
+      jwt.Parse($STR, func($T *jwt.Token) (interface{}, error) {
+          return ..., nil
+      })

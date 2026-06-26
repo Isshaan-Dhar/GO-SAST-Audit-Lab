@@ -1,0 +1,27 @@
+                   
+                   
+┌─────────────────┐
+│ 3 Code Findings │
+└─────────────────┘
+                                 
+  [36m[22m[24m  lab_targets.go[0m
+   ❯❯❱ cwe-798-hardcoded-secret
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          CWE-798: Hardcoded Secret. Never store credentials or keys in source code.
+                                                                                    
+           13┆ const hardcodedJWTSecret = "super-secret-dev-key-123"
+   
+   ❯❯❱ cwe-89-sql-injection
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          CWE-89: SQL Injection vulnerability. Do not use string formatting to build SQL queries.
+                                                                                                 
+           20┆ query := fmt.Sprintf("SELECT id, name, role FROM users WHERE username = '%s'", username)
+   
+   ❯❯❱ cwe-insecure-jwt-validation
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Insecure JWT Validation: Missing explicit algorithm allowlist.
+                                                                        
+           35┆ token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+           36┆    return []byte(hardcodedJWTSecret), nil
+           37┆ })
+
